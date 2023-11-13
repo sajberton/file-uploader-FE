@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 //Interfaces
 import { TextData } from "../../Interfaces/TextData";
 //helpers
-import { createFile } from "../../services/createFile";
+import { createFile } from "../../services/fileServices";
 //style
 import "./FileUploader.css";
 

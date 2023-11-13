@@ -10,11 +10,15 @@ import DataGridTable from "./Components/DataGridTable/DataGridTable";
 import { TextData } from "./Interfaces/TextData";
 import { TextFile } from "./Interfaces/TextFile";
 //helpers
-import { getFiles } from "./services/getFiles";
+import {
+  getLastFileData,
+  getFileDataByFileId,
+} from "./services/fileDataServices";
 //style
 import "./App.css";
 import { PageState } from "./Interfaces/PageState";
-import { getPagedFiles } from "./services/createFile";
+import { getPagedFiles } from "./services/fileServices";
+import { GridRowSelectionModel } from "@mui/x-data-grid";
 
 function App() {
   useEffect(() => {
@@ -46,7 +50,17 @@ function App() {
 
   const getDataLastFile = async () => {
     try {
-      let res = await getFiles("text-file-data/get-last");
+      let res = await getLastFileData("text-file-data/get-last");
+      setChartData(res.data);
+    } catch (err: any) {
+      toast.error(err.response.data);
+    }
+  };
+
+  const handleRowSelection = async (obj: GridRowSelectionModel) => {
+    let id = obj[0];
+    try {
+      let res = await getFileDataByFileId("text-file-data/get-file-id", id);
       setChartData(res.data);
     } catch (err: any) {
       toast.error(err.response.data);
@@ -60,8 +74,8 @@ function App() {
       <DataGridTable
         rows={textFiles}
         setPageState={setPageState}
-        pageState={pageState}
         rowCount={rowCount}
+        handleRowSelection={handleRowSelection}
       />
       <ToastContainer position={"top-right"} />
     </div>

@@ -7,13 +7,7 @@ input[type="file"]{
 }
 
 .fileButton{
-    /* text-align:center; */
-    /* padding:3%;
-    height: 8px;
-    width: 10px;
-    border:thin solid black; */
-
-    background-color: #04AA6D; /* Green */
+  background-color: #04AA6D; 
   border: none;
   color: white;
   padding: 15px 32px;
